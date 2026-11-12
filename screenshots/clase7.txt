@@ -1,0 +1,56 @@
+Recapitulación: Producción y robustez: observabilidad, costos y despliegue
+Con Valentina y Julián · 5 min
+
+Escuchar
+Tocá cualquier unidad del módulo para volver a la teoría. El audio sigue reproduciéndose en el widget.
+Valentina
+0:00
+Hola a todos y bienvenidos a este episodio de cierre. Hoy estamos terminando un módulo fundamental para cualquier ingeniero de inteligencia artificial: el paso de un prototipo que funciona a un sistema que realmente sobrevive en el mundo real. Me acompaña Julián, especialista en despliegue y producción. Julián, ¿cómo estás?
+
+Julián
+0:19
+Qué tal, Valentina. Muy contento de estar acá. Este es probablemente mi tema favorito porque es donde la teoría se choca con la realidad. Podemos tener el mejor modelo de lenguaje del mundo, pero si no sabemos qué está pasando adentro, si es carísimo o si se cuelga cuando entran diez usuarios, no tenemos un producto, tenemos un problema.
+
+Valentina
+0:45
+Totalmente de acuerdo. Y para empezar a desglosar este camino a producción, la primera parada obligatoria que vimos en el módulo fue la observabilidad. Hablamos de herramientas como Arize Phoenix y LangSmith. ¿Por qué dirías que esto es lo primero que necesitamos antes de siquiera pensar en escalar?
+
+Julián
+1:02
+Es que sin observabilidad estás caminando a ciegas. En el desarrollo de software tradicional tenías logs que te decían paso a paso qué fallaba. En ingeniería de IA, tenemos flujos complejos, con agentes, llamadas a bases de datos vectoriales y promts intermedios. Herramientas como LangSmith o Arize Phoenix nos dan el trazado completo. Nos permiten ver exactamente qué pedazo de contexto se recuperó o en qué punto de la cadena el modelo empezó a alucinar. Es la diferencia entre decir esto no anda y decir el paso tres del agente está recibiendo información ruidosa.
+
+Valentina
+1:44
+Y eso nos lleva directo al segundo gran tema: la escalabilidad. Porque una vez que ves lo que pasa, te das cuenta de que las llamadas a un LLM son lentas, a veces tardan segundos o incluso minutos si el flujo es largo. Ahí es donde entran FastAPI y Redis, ¿verdad?
+
+Julián
+1:59
+Exacto. Ahí es donde muchos proyectos fallan. Si hacés que el usuario se quede mirando una pantalla esperando a que el servidor de IA responda de forma síncrona, la experiencia es terrible y el sistema se bloquea fácil. La solución que estudiamos es la asincronía. Usamos FastAPI para recibir la petición y Redis para manejar una cola de tareas. El usuario recibe un ID de tarea, se libera la conexión, y el trabajador procesa la IA de fondo. Es un cambio de paradigma: ya no esperamos el resultado, monitoreamos el proceso.
+
+Valentina
+2:40
+Es como pedir comida en un restaurante rápido: te dan el ticket y te avisan cuando está listo en lugar de dejarte parado frente al cajero mientras cocinan. Ahora, Julián, hay casos donde no podemos dejar todo en manos de la automatización por más rápida que sea. Hablamos de Human in the Loop. ¿Cuándo se vuelve esto una pieza de ingeniería y no solo una demora?
+
+Julián
+3:00
+Esa es una gran distinción. El Human in the Loop o humano en el ciclo no es un parche, es una estrategia de robustez. Hay tareas críticas, tal vez una recomendación médica o la generación de un contrato legal, donde el riesgo de un error del modelo es demasiado alto. En esos casos, diseñamos el sistema para que se detenga y pida una validación. Lo que aprendimos es que hay que saber dónde poner esos puntos de control para que el sistema siga siendo eficiente pero seguro. Es una forma de gestionar el riesgo operativo.
+
+Valentina
+3:43
+Y todo esto que mencionas, la trazabilidad, la asincronía y la supervisión humana, converge en la práctica final que realizaron los estudiantes: la API de producción con monitoreo activo. Ahí es donde se tocan los costos, ¿no? Porque cada llamada a la API tiene un precio.
+
+Julián
+4:00
+Absolutamente. En producción, la eficiencia es dinero. No solo monitoreamos si el sistema responde bien, sino cuántos tokens estamos gastando y cuál es la latencia real. Si no controlas los costos desde el día uno, tu aplicación puede morir de éxito: más usuarios significan más gastos de los que podés cubrir. Por eso la pre entrega fue tan importante, porque obligó a juntar todo: el código asíncrono, los dashboards de monitoreo y la lógica de negocio.
+
+Valentina
+4:37
+Para cerrar, Julián, ¿cuál sería tu consejo final para alguien que acaba de terminar este módulo y se siente un poco abrumado por tanta herramienta técnica?
+
+Julián
+4:45
+Que recuerden que la ingeniería de IA no es solo saber escribir promts. La verdadera diferencia está en construir sistemas robustos. Empiecen por la observabilidad; si pueden ver qué pasa, pueden mejorar el resto. La robustez no es algo que se agrega al final, se construye con cada decisión de arquitectura que tomamos.
+
+Valentina
+5:06
+Gran cierre, Julián. Gracias por acompañarnos a repasar este camino hacia la producción. Y a ustedes, los estudiantes, ¡felicitaciones por completar el módulo! Ahora tienen las herramientas para construir soluciones de IA que no solo sean inteligentes, sino también confiables y escalables. ¡Nos vemos en el próximo nivel!
